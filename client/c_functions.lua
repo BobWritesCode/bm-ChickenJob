@@ -256,7 +256,7 @@ function SellPackedChicken()
     IsPortioningChicken = false
     if not cancelled then -- finished
       TriggerServerEvent("bm-chickenjob:sell", 3)
-    else -- cancelled
+    else                  -- cancelled
       -- pass
     end
   end)
@@ -306,7 +306,7 @@ function EndChickenChase()
 end
 
 -- [QB-Target required] Spawns farmer ped
-function SpawnFarmer ()
+function SpawnFarmer()
   CreateThread(function()
     local model = Config.Locations.chickenFarm.PedModel
     RequestModel(model)
@@ -334,7 +334,7 @@ function SpawnFarmer ()
 end
 
 -- [QB-Target required] Spawns chicken dealer ped
-function SpawnDealer ()
+function SpawnDealer()
   CreateThread(function()
     local model = Config.Locations.chickenDealer.PedModel
     RequestModel(model)
@@ -382,7 +382,7 @@ function SetUpQBTargetWorkAreas()
       },
       distance = 1.5
     })
-    x = x +1
+    x = x + 1
   end
   for k, v in pairs(Config.Locations.packing) do
     if Config.Debug then print("^4[Debug] ^2Setting up workarea at: ^3" .. v.QBTargetCoords .. "^7") end
@@ -403,10 +403,9 @@ function SetUpQBTargetWorkAreas()
       },
       distance = 1.5
     })
-    x = x +1
+    x = x + 1
   end
 end
-
 
 function CheckCorrectLocation(_coords)
   local plyCoords = GetEntityCoords(GetPlayerPed(-1))

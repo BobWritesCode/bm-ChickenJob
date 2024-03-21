@@ -25,34 +25,38 @@ local ItemList = {
 RegisterServerEvent('bm-chickenjob:giveChickens', function()
   local src = source
   local Player = QBCore.Functions.GetPlayer(src)
-  Notification(src,  false, "You received 3 alive chickens!", "success", 8000)
+  Notification(src, false, "You received 3 alive chickens!", "success", 8000)
   Player.Functions.AddItem(Config.RequiredItems.alivechicken.Name, 3)
   TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items[Config.RequiredItems.alivechicken.Name], "add")
 end)
 
 RegisterServerEvent('bm-chickenjob:startChicken', function()
   local src = source
-  Notification(src,  false, "Lets catch the chicken dumbass!", "success", 8000)
+  Notification(src, false, "Lets catch the chicken dumbass!", "success", 8000)
 end)
 
 RegisterServerEvent('bm-chickenjob:getcutChicken', function()
   local src = source
   local Player = QBCore.Functions.GetPlayer(src)
-  Notification(src,  false, "Well! You slaughtered chicken.", "success", 8000)
+  Notification(src, false, "Well! You slaughtered chicken.", "success", 8000)
   Player.Functions.RemoveItem(Config.RequiredItems.alivechicken.Name, 1)
   Player.Functions.AddItem(Config.RequiredItems.slaughteredchicken.Name, 1)
-  TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items[Config.RequiredItems.alivechicken.Name], "remove")
-  TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items[Config.RequiredItems.slaughteredchicken.Name], "add")
+  TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items[Config.RequiredItems.alivechicken.Name],
+    "remove")
+  TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items[Config.RequiredItems.slaughteredchicken.Name],
+    "add")
 end)
 
 RegisterServerEvent('bm-chickenjob:getpackedChicken', function()
   local src = source
   local Player = QBCore.Functions.GetPlayer(src)
-  Notification(src,  false, "You packaged up some chicken.", "success", 8000)
+  Notification(src, false, "You packaged up some chicken.", "success", 8000)
   Player.Functions.RemoveItem(Config.RequiredItems.slaughteredchicken.Name, 1)
   Player.Functions.AddItem(Config.RequiredItems.packagedchicken.Name, 1)
-  TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items[Config.RequiredItems.slaughteredchicken.Name], "remove")
-  TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items[Config.RequiredItems.packagedchicken.Name], "add")
+  TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items[Config.RequiredItems.slaughteredchicken.Name],
+    "remove")
+  TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items[Config.RequiredItems.packagedchicken.Name],
+    "add")
 end)
 
 RegisterServerEvent('bm-chickenjob:sell', function()
@@ -69,7 +73,8 @@ RegisterServerEvent('bm-chickenjob:sell', function()
       end
     end
     Player.Functions.AddMoney("cash", price, "sold-items")
-    TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items[Config.RequiredItems.packagedchicken.Name], "remove")
+    TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items[Config.RequiredItems.packagedchicken.Name],
+      "remove")
     Notification(src, false, "You have sold your items", "error")
   else
     Notification(src, false, "You don't have items", "error")

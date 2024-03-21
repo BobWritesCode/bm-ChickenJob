@@ -5,13 +5,13 @@ Config = {
   UseQBTarget = true,
 
   -- NOTIFY : Choice of notification system
-  Notify = 'QB', -- Possible values: QB / okokNotify
+  Notify = 'QB',                   -- Possible values: QB / okokNotify
 
-  CaptureChance = 70,             -- 0-100 chance of catching a chicken on each dive
+  CaptureChance = 70,              -- 0-100 chance of catching a chicken on each dive
   SellPrice = math.random(10, 50), -- How much each package chicken sells for.
-  CuttingUpChickenTime = 15000,   -- Progress bar time when butchering.
-  PackagingChickenTime = 15000,   -- Progress bar time when packaging.
-  SellingChickenTime = 15000,     -- Progress bar time when selling.
+  CuttingUpChickenTime = 15000,    -- Progress bar time when butchering.
+  PackagingChickenTime = 15000,    -- Progress bar time when packaging.
+  SellingChickenTime = 15000,      -- Progress bar time when selling.
 
   Locations = {
     chickenFarm = {
@@ -44,8 +44,8 @@ Config = {
     },
     cutting = {
       one = {
-        coords = vector3(-95.72, 6207.15, 31.03),          -- Non QB-Target coords
-        QBTargetCoords = vector3(-95.19, 6207.48, 31.03),  -- Coords for QB-Targert
+        coords = vector3(-95.72, 6207.15, 31.03),         -- Non QB-Target coords
+        QBTargetCoords = vector3(-95.19, 6207.48, 31.03), -- Coords for QB-Targert
         A = 311.0,
         B = -94.87,
         C = 6207.008,
@@ -53,8 +53,8 @@ Config = {
         E = 45.0,
       },
       two = {
-        coords = vector3(-100.52, 6202.48, 31.03),         -- Non QB-Target coords
-        QBTargetCoords = vector3(-100.08, 6202.0, 31.03),  -- Coords for QB-Targert
+        coords = vector3(-100.52, 6202.48, 31.03),        -- Non QB-Target coords
+        QBTargetCoords = vector3(-100.08, 6202.0, 31.03), -- Coords for QB-Targert
         A = 222.0,
         B = -100.39,
         C = 6201.56,
