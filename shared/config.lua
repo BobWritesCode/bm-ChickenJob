@@ -1,13 +1,17 @@
 Config = {
 
   -- DEBUG: Turn debug mode on (true/false)
-  Debug = true,
+  Debug = false,
+  UseQBTarget = true,
 
   -- NOTIFY : Choice of notification system
   Notify = 'QB', -- Possible values: QB / okokNotify
 
-  CaptureChance = 70, -- 0-100 chance of catching a chicken on each dive
-  SellPrice = math.random(10,50), -- How much each package chicken sells for.
+  CaptureChance = 70,             -- 0-100 chance of catching a chicken on each dive
+  SellPrice = math.random(10, 50), -- How much each package chicken sells for.
+  CuttingUpChickenTime = 15000,   -- Progress bar time when butchering.
+  PackagingChickenTime = 15000,   -- Progress bar time when packaging.
+  SellingChickenTime = 15000,     -- Progress bar time when selling.
 
   Locations = {
     chickenFarm = {
@@ -17,6 +21,8 @@ Config = {
       blipDisplay = 4,
       blipScale = 0.6,
       blipColour = 46,
+      PedModel = "a_m_m_farmer_01", -- If using QB-Target
+      PedModelHeading = 228.9       -- If using QB-Target
     },
     chickenProcessing = {
       blipName = "Chicken Slaughter House",
@@ -33,10 +39,13 @@ Config = {
       blipDisplay = 4,
       blipScale = 0.6,
       blipColour = 64,
+      PedModel = "a_m_m_hillbilly_01", -- If using QB-Target
+      PedModelHeading = 117.07         -- If using QB-Target
     },
     cutting = {
       one = {
-        coords = vector3(-95.72, 6207.15, 31.03),
+        coords = vector3(-95.72, 6207.15, 31.03),          -- Non QB-Target coords
+        QBTargetCoords = vector3(-95.19, 6207.48, 31.03),  -- Coords for QB-Targert
         A = 311.0,
         B = -94.87,
         C = 6207.008,
@@ -44,7 +53,8 @@ Config = {
         E = 45.0,
       },
       two = {
-        coords = vector3(-100.52, 6202.48, 31.03),
+        coords = vector3(-100.52, 6202.48, 31.03),         -- Non QB-Target coords
+        QBTargetCoords = vector3(-100.08, 6202.0, 31.03),  -- Coords for QB-Targert
         A = 222.0,
         B = -100.39,
         C = 6201.56,
@@ -54,33 +64,23 @@ Config = {
     },
     packing = {
       {
-        coords = vector3(-106.44, 6204.2, 31.02),
+        coords = vector3(-106.44, 6204.2, 31.02), -- Non QB-Target coords
+        QBTargetCoords = vector3(-106.56, 6205.19, 31.02)
       },
       {
-        coords = vector3(-104.20, 6206.45, 31.02),
+        coords = vector3(-104.20, 6206.45, 31.02), -- Non QB-Target coords
+        QBTargetCoords = vector3(-104.53, 6207.18, 31.02)
+      },
+      {
+        coords = vector3(-101.77, 6208.93, 31.02), -- Non QB-Target coords
+        QBTargetCoords = vector3(-102.59, 6209.33, 31.02)
+      },
+      {
+        coords = vector3(-99.59, 6210.97, 31.02), -- Non QB-Target coords
+        QBTargetCoords = vector3(-100.45, 6211.65, 31.021)
       }
     }
-
   },
-
-  ---------------------------------------------
-  portionX = -95.72, --Portion
-  portionY = 6207.15,
-  portionZ = 31.03,
-  ---
-  portionX2 = -100.52, --Portion
-  portionY2 = 6202.48,
-  portionZ2 = 31.03,
-  ---
-  packingX = -106.44, --Pack
-  packingY = 6204.29,
-  packingZ = 31.02,
-  ---
-  packingX2 = -104.20, --Pack
-  packingY2 = 6206.45,
-  packingZ2 = 31.02,
-
-  ---
 
 
   -- REQUIREDITEMS: These are here incase you needed to save the items under a different name.

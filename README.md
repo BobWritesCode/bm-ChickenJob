@@ -1,10 +1,8 @@
-# Bob's Mods - Chicken Job - (Improved Script)
-
-## WORK IN PROGRESS - NOT READY FOR USE
+# [Bob's Mods] Chicken Job - (Improved Script)
 
 ## Disclosure
 
-I did not write the original script. It was very outdated, I have done a complete review and updated necessary components. Author of script I received was "GreenArrow@Sri Lanka New Life Roleplay"
+I did not write the original script. It was very outdated, I have done a complete review and updated all necessary components. As well as many optimisations and fixes I have also added a highly configurable config and qb-target'ing.
 
 ## Description
 
@@ -18,6 +16,7 @@ A chicken job for civilians in your city.
 
 - Chicken capturing mini-game. Get in a pen with chickens and try to catch them by diving at them.
 - Chicken processing simulation. Take the chickens you have captured to be processed and packaged.
+- Optional to us qb-Target, can be toggled in config.
 
 ## Usage
 
@@ -27,6 +26,14 @@ A chicken job for civilians in your city.
 ## Commands
 
 - None
+
+## Install
+
+This script will automatically add the required items to the shared items. But you will need to add the images for those items. There are some example images attached.
+
+## Credit
+
+Original script provided to be was authored by "GreenArrow@Sri Lanka New Life Roleplay".
 
 ## License
 

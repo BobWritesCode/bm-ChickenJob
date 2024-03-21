@@ -125,7 +125,7 @@ function Packing()
   SetEntityHeading(GetPlayerPed(-1), 40.0)
   exports['progressbar']:Progress({
     name = "packing_task",
-    duration = 15000,
+    duration = Config.PackagingChickenTime,
     label = "Packing..",
     useWhileDead = false,
     canCancel = true,
@@ -184,7 +184,7 @@ function PortionChicken(position)
   SetEntityRotation(chickenEntity, 90.0, 0.0, E, 1, true)
   exports['progressbar']:Progress({
     name = "portion_task",
-    duration = 15000,
+    duration = Config.CuttingUpChickenTime,
     label = "Cutting up the chicken..",
     useWhileDead = false,
     canCancel = true,
@@ -230,7 +230,7 @@ function SellPackedChicken()
   SetEntityHeading(prop, GetEntityHeading(GetPlayerPed(-1)))
   exports['progressbar']:Progress({
     name = "selling_task",
-    duration = 15000,
+    duration = Config.SellingChickenTime,
     label = "Selling chicken..",
     useWhileDead = false,
     canCancel = true,
@@ -269,7 +269,7 @@ function ChickenChaseThread()
     while IsPlayerCatchingChickens do
       Wait(5)
       local plyCoords = GetEntityCoords(GetPlayerPed(-1))
-      local farm = Config.Blips.chickenFarm.coords
+      local farm = Config.Locations.chickenFarm.coords
       if Vdist(plyCoords.x, plyCoords.y, plyCoords.z, farm.x, farm.y, farm.z) > 40 then
         EndChickenChase()
       end
@@ -303,6 +303,119 @@ function EndChickenChase()
   for _, chicken in pairs(Chickens) do
     DeleteEntity(chicken.entity)
   end
+end
+
+-- [QB-Target required] Spawns farmer ped
+function SpawnFarmer ()
+  CreateThread(function()
+    local model = Config.Locations.chickenFarm.PedModel
+    RequestModel(model)
+    while not HasModelLoaded(model) do
+      Wait(0)
+    end
+    local coords = Config.Locations.chickenFarm.coords
+    local h = Config.Locations.chickenFarm.PedModelHeading
+    local entity = CreatePed(0, model, coords, h, true, false)
+    exports['qb-target']:AddTargetEntity(entity, {
+      options = {
+        {
+          icon = 'fas fa-example',
+          label = 'Catch some chickens',
+          targeticon = 'fas fa-example',
+          action = function(_entity)
+            if IsPedAPlayer(_entity) then return false end
+            if CheckCorrectLocation(coords) then SellPackedChicken() end
+          end,
+        }
+      },
+      distance = 2.5,
+    })
+  end)
+end
+
+-- [QB-Target required] Spawns chicken dealer ped
+function SpawnDealer ()
+  CreateThread(function()
+    local model = Config.Locations.chickenDealer.PedModel
+    RequestModel(model)
+    while not HasModelLoaded(model) do
+      Wait(0)
+    end
+    local coords = Config.Locations.chickenDealer.coords
+    local h = Config.Locations.chickenDealer.PedModelHeading
+    local entity = CreatePed(0, model, coords, h, true, false)
+    exports['qb-target']:AddTargetEntity(entity, {
+      options = {
+        {
+          icon = 'fas fa-example',
+          label = 'Sell packaged chickens.',
+          targeticon = 'fas fa-example',
+          action = function(_entity)
+            if IsPedAPlayer(_entity) then return false end
+            if CheckCorrectLocation(coords) then SellPackedChicken() end
+          end,
+        }
+      },
+      distance = 2.5,
+    })
+  end)
+end
+
+function SetUpQBTargetWorkAreas()
+  local x = 1
+  for k, v in pairs(Config.Locations.cutting) do
+    if Config.Debug then print("^4[Debug] ^2Setting up workarea at: ^3" .. v.QBTargetCoords .. "^7") end
+    exports['qb-target']:AddCircleZone("workarea_" .. tostring(x), vector3(v.QBTargetCoords), 0.7, {
+      name = "workarea_" .. tostring(x),
+      useZ = true,
+      debugPoly = Config.Debug,
+    }, {
+      options = {
+        {
+          type = 'client',
+          action = function()
+            PortionChicken(k)
+          end,
+          icon = 'fas fa-sign-in-alt',
+          label = 'Prepare chicken',
+        },
+      },
+      distance = 1.5
+    })
+    x = x +1
+  end
+  for k, v in pairs(Config.Locations.packing) do
+    if Config.Debug then print("^4[Debug] ^2Setting up workarea at: ^3" .. v.QBTargetCoords .. "^7") end
+    exports['qb-target']:AddCircleZone("workarea_" .. tostring(x), vector3(v.QBTargetCoords), 0.7, {
+      name = "workarea_" .. tostring(x),
+      useZ = true,
+      debugPoly = Config.Debug,
+    }, {
+      options = {
+        {
+          type = 'client',
+          action = function()
+            Packing()
+          end,
+          icon = 'fas fa-sign-in-alt',
+          label = 'Package chicken',
+        },
+      },
+      distance = 1.5
+    })
+    x = x +1
+  end
+end
+
+
+function CheckCorrectLocation(_coords)
+  local plyCoords = GetEntityCoords(GetPlayerPed(-1))
+  local coords = _coords
+  if Vdist(plyCoords, coords) < 5 then
+    return true
+  end
+  Notification(false, "Too far from required location", "error", 5000)
+  return false
 end
 
 function Notification(_title, _msg, _notifyType, _notifyTime)

@@ -2,8 +2,8 @@ fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'
 author 'Bob\'s Mods'
-description 'bm-ChickenJob'
-version '0.01'
+description 'Chicken job for civilians in the city.'
+version '1.00'
 
 shared_script 'shared/config.lua'
 client_script {
