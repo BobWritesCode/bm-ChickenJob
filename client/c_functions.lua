@@ -81,6 +81,10 @@ end
 
 function StartChickenChase()
   DebugPrint2('Function called: ', 'StartChickenChase()')
+  if IsPlayerCatchingChickens then
+    Notification(false, "You are already doing this activity", "error", 8000)
+    return
+  end
   DoScreenFadeOut(500)
   Wait(500)
   SetEntityCoordsNoOffset(GetPlayerPed(-1), 2385.963, 5047.333, 46.400, 0, 0, 1)
