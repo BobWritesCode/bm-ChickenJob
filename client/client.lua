@@ -1,11 +1,15 @@
 QBCore = exports['qb-core']:GetCoreObject()
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
-  SetUpBlips()
+  StartUp ()
 end)
 
 AddEventHandler('onResourceStart', function(resourceName)
   if GetCurrentResourceName() ~= resourceName then return end
+  StartUp ()
+end)
+
+function StartUp ()
   SetUpBlips()
   if Config.UseQBTarget then
     SpawnFarmer()
@@ -16,7 +20,7 @@ AddEventHandler('onResourceStart', function(resourceName)
     Markers2()
     Markers3()
   end
-end)
+end
 
 function Markers1()
   CreateThread(function()
