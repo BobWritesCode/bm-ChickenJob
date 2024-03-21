@@ -1,0 +1,47 @@
+# Bob's Mods - Chicken Job - (Improved Script)
+
+## WORK IN PROGRESS - NOT READY FOR USE
+
+## Disclosure
+
+I did not write the original script. It was very outdated, I have done a complete review and updated necessary components. Author of script I received was "GreenArrow@Sri Lanka New Life Roleplay"
+
+## Description
+
+A chicken job for civilians in your city.
+
+## Dependencies
+
+- QB-Core
+
+## Features
+
+- Chicken capturing mini-game. Get in a pen with chickens and try to catch them by diving at them.
+- Chicken processing simulation. Take the chickens you have captured to be processed and packaged.
+
+## Usage
+
+- Start the job by going to the chicken farm.
+- Catch chickens then take them to the chicken processing factory to be processed.
+
+## Commands
+
+- None
+
+## License
+
+    [Bob's Mods] Chicken Job (Improved Script)
+    Copyright (C) 2024
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>
