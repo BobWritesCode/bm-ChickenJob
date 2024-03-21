@@ -324,7 +324,7 @@ function SpawnFarmer()
           targeticon = 'fas fa-example',
           action = function(_entity)
             if IsPedAPlayer(_entity) then return false end
-            if CheckCorrectLocation(coords) then SellPackedChicken() end
+            if CheckCorrectLocation(coords) then StartChickenChase() end
           end,
         }
       },
