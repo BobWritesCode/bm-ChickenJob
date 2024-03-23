@@ -12,8 +12,6 @@ end)
 function StartUp ()
   SetUpBlips()
   if Config.UseQBTarget then
-    SpawnFarmer()
-    SpawnDealer()
     SetUpQBTargetWorkAreas()
   else
     Markers1()
@@ -21,6 +19,18 @@ function StartUp ()
     Markers3()
   end
 end
+
+RegisterNetEvent('bm-chickenjob:AssignNewChickenFarmerEnt', function(netID)
+  DebugPrint2('AssignNewChickenFarmerEnt: ', netID)
+  Wait(200)
+  AssignTargetToChickenFarmer(NetworkGetEntityFromNetworkId(netID))
+end)
+
+RegisterNetEvent('bm-chickenjob:AssignNewChickenDealerEnt', function(netID)
+  DebugPrint2('AssignNewChickenDealerEnt: ', netID)
+  Wait(200)
+  AssignTargetToChickenDealer(NetworkGetEntityFromNetworkId(netID))
+end)
 
 function Markers1()
   CreateThread(function()

@@ -13,4 +13,6 @@ client_script {
 server_script {
   'server/server.lua',
   'server/s_functions.lua',
+  'server/chickenFarmer.lua',
+  'server/chickenDealer.lua'
 }

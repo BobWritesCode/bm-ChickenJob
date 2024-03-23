@@ -21,6 +21,8 @@ Chickens = {
     isCaught = false,
   }
 }
+local farmerEnt
+local dealerEnt
 
 function SetUpBlips()
   local blips = {}
@@ -339,60 +341,46 @@ function EndChickenChase()
   end
 end
 
--- [QB-Target required] Spawns farmer ped
-function SpawnFarmer()
-  CreateThread(function()
-    local model = Config.Locations.chickenFarm.PedModel
-    RequestModel(model)
-    while not HasModelLoaded(model) do
-      Wait(0)
-    end
-    local coords = Config.Locations.chickenFarm.coords
-    local h = Config.Locations.chickenFarm.PedModelHeading
-    local entity = CreatePed(0, model, coords, h, true, false)
-    exports['qb-target']:AddTargetEntity(entity, {
-      options = {
-        {
-          icon = 'fas fa-example',
-          label = 'Catch some chickens',
-          targeticon = 'fas fa-example',
-          action = function(_entity)
-            if IsPedAPlayer(_entity) then return false end
-            if CheckCorrectLocation(coords) then StartChickenChase() end
-          end,
-        }
-      },
-      distance = 2.5,
-    })
-  end)
+function AssignTargetToChickenFarmer(ent)
+  DebugPrint2('Function: ', 'AssignTargetToChickenFarmer()')
+  if farmerEnt then
+    exports['qb-target']:RemoveTargetEntity(farmerEnt, 'Remove farmer Ent')
+  end
+  farmerEnt = ent
+  exports['qb-target']:AddTargetEntity(ent, {
+    options = {
+      {
+        icon = 'fas fa-example',
+        label = 'Catch some chickens',
+        targeticon = 'fas fa-example',
+        action = function()
+          StartChickenChase()
+        end,
+      }
+    },
+    distance = 2.5,
+  })
 end
 
--- [QB-Target required] Spawns chicken dealer ped
-function SpawnDealer()
-  CreateThread(function()
-    local model = Config.Locations.chickenDealer.PedModel
-    RequestModel(model)
-    while not HasModelLoaded(model) do
-      Wait(0)
-    end
-    local coords = Config.Locations.chickenDealer.coords
-    local h = Config.Locations.chickenDealer.PedModelHeading
-    local entity = CreatePed(0, model, coords, h, true, false)
-    exports['qb-target']:AddTargetEntity(entity, {
-      options = {
-        {
-          icon = 'fas fa-example',
-          label = 'Sell packaged chickens.',
-          targeticon = 'fas fa-example',
-          action = function(_entity)
-            if IsPedAPlayer(_entity) then return false end
-            if CheckCorrectLocation(coords) then SellPackedChicken() end
-          end,
-        }
-      },
-      distance = 2.5,
-    })
-  end)
+function AssignTargetToChickenDealer(ent)
+  DebugPrint2('Function: ', 'AssignTargetToChickenDealer()')
+  if dealerEnt then
+    exports['qb-target']:RemoveTargetEntity(dealerEnt, 'Remove dealer Ent')
+  end
+  dealerEnt = ent
+  exports['qb-target']:AddTargetEntity(dealerEnt, {
+    options = {
+      {
+        icon = 'fas fa-example',
+        label = 'Sell packaged chickens.',
+        targeticon = 'fas fa-example',
+        action = function()
+          SellPackedChicken()
+        end,
+      }
+    },
+    distance = 2.5,
+  })
 end
 
 function SetUpQBTargetWorkAreas()
@@ -441,15 +429,6 @@ function SetUpQBTargetWorkAreas()
   end
 end
 
-function CheckCorrectLocation(_coords)
-  local plyCoords = GetEntityCoords(GetPlayerPed(-1))
-  local coords = _coords
-  if Vdist(plyCoords, coords) < 5 then
-    return true
-  end
-  Notification(false, "Too far from required location", "error", 5000)
-  return false
-end
 
 function Notification(_title, _msg, _notifyType, _notifyTime)
   DebugPrint2('Function called: ', 'Notification()')

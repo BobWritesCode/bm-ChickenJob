@@ -1,5 +1,7 @@
 QBCore = exports['qb-core']:GetCoreObject()
 
+local dealerPed = nil
+
 -- Create iteams
 for _, item in pairs(Config.RequiredItems) do
   exports['qb-core']:AddItem(
@@ -78,5 +80,15 @@ RegisterServerEvent('bm-chickenjob:sell', function()
   end
 end)
 
+RegisterServerEvent('bm-chickenjob:SetDealerPed', function(entity)
+  DebugPrint2('bm-chickenjob:SetDealerPed: ', entity)
+  dealerPed = entity
+end)
+
+QBCore.Functions.CreateCallback('bm-chickenjob:GetDealerPed',
+  function(_, cb)
+    DebugPrint2('bm-chickenjob:GetDealerPed: ', dealerPed)
+    cb(dealerPed)
+  end)
 
 print("^1[Bob\'s Mods] ^2Chicken Job ^7- ^5Started.^7")
