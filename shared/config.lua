@@ -1,18 +1,34 @@
 Config = {
-
+  ---------------------------------
   -- DEBUG: Turn debug mode on (true/false)
   Debug = false,
+  ---------------------------------
+  --Use QB-Target:  Turn QB-Target mode on (true/false)
   UseQBTarget = true,
-
+  ---------------------------------
   -- NOTIFY : Choice of notification system
-  Notify = 'QB',                   -- Possible values: QB / okokNotify
-
-  CaptureChance = 70,              -- 0-100 chance of catching a chicken on each dive
+  Notify = 'QB',  -- Possible values: QB / okokNotify
+  ---------------------------------
+  CaptureChance = 70, -- 0-100 chance of catching a chicken on each dive
   SellPrice = math.random(10, 50), -- How much each package chicken sells for.
-  CuttingUpChickenTime = 15000,    -- Progress bar time when butchering.
-  PackagingChickenTime = 15000,    -- Progress bar time when packaging.
-  SellingChickenTime = 15000,      -- Progress bar time when selling.
-
+  CuttingUpChickenTime = 15000, -- Progress bar time when butchering.
+  PackagingChickenTime = 15000, -- Progress bar time when packaging.
+  SellingChickenTime = 15000, -- Progress bar time when selling.
+  ---------------------------------
+  -- ChickenCaptureRewards: Rewards pool for chicken chase. The more chickens the more chance of getting each time.
+  -- i.e. 3 chickens, 100 chance means getting 3 of that reward. 33 means on average will get 1 each chicken chase.
+  -- You can add as many rewards as you like.
+  ChickenCaptureRewards = {
+    alivechicken = {
+      label = "alive chicken", -- Label to show in notifications
+      chance = 100  -- 0-100 chance of getting item per chicken captured.
+    },
+    egg = {
+      label = "egg", -- Label to show in notifications
+      chance = 30 -- 0-100 chance of getting item per chicken captured.
+    }
+  },
+  ---------------------------------
   Locations = {
     chickenFarm = {
       blipName = "Chicken Farm",
@@ -22,7 +38,7 @@ Config = {
       blipScale = 0.6,
       blipColour = 46,
       PedModel = "a_m_m_farmer_01", -- If using QB-Target
-      PedModelHeading = 228.9       -- If using QB-Target
+      PedModelHeading = 228.9 -- If using QB-Target
     },
     chickenProcessing = {
       blipName = "Chicken Slaughter House",
@@ -39,12 +55,12 @@ Config = {
       blipDisplay = 4,
       blipScale = 0.6,
       blipColour = 64,
-      PedModel = "a_m_m_hillbilly_01", -- If using QB-Target
-      PedModelHeading = 117.07         -- If using QB-Target
+      PedModel = "a_m_m_hillbilly_01",  -- If using QB-Target
+      PedModelHeading = 117.07  -- If using QB-Target
     },
-    cutting = {
+    cutting = { -- I WOULD AVOID CHANGING THESE UNLESS YOU KNOW WHAT YOU ARE DOING.
       one = {
-        coords = vector3(-95.72, 6207.15, 31.03),         -- Non QB-Target coords
+        coords = vector3(-95.72, 6207.15, 31.03), -- Non QB-Target coords
         QBTargetCoords = vector3(-95.19, 6207.48, 31.03), -- Coords for QB-Targert
         A = 311.0,
         B = -94.87,
@@ -53,7 +69,7 @@ Config = {
         E = 45.0,
       },
       two = {
-        coords = vector3(-100.52, 6202.48, 31.03),        -- Non QB-Target coords
+        coords = vector3(-100.52, 6202.48, 31.03),  -- Non QB-Target coords
         QBTargetCoords = vector3(-100.08, 6202.0, 31.03), -- Coords for QB-Targert
         A = 222.0,
         B = -100.39,
@@ -81,8 +97,7 @@ Config = {
       }
     }
   },
-
-
+  ---------------------------------
   -- REQUIREDITEMS: These are here incase you needed to save the items under a different name.
   RequiredItems = {
     alivechicken       = {
@@ -122,6 +137,8 @@ Config = {
       Description = "For all the thirsty out there"
     },
   },
+  ---------------------------------
+  -- DO NOT CHANGE ANY OF THE BELOW UNLESS YOU KNOW WHAT YOU ARE DOING.
   Keys = {
     ["ESC"] = 322,
     ["F1"] = 288,

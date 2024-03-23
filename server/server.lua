@@ -22,12 +22,9 @@ local ItemList = {
   ["packagedchicken"] = math.random(50, 100),
 }
 
-RegisterServerEvent('bm-chickenjob:giveChickens', function()
-  local src = source
-  local Player = QBCore.Functions.GetPlayer(src)
-  Notification(src, false, "You received 3 alive chickens!", "success", 8000)
-  Player.Functions.AddItem(Config.RequiredItems.alivechicken.Name, 3)
-  TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items[Config.RequiredItems.alivechicken.Name], "add")
+RegisterServerEvent('bm-chickenjob:giveChickens', function(rewardData)
+  DebugPrint2("Called: ", "bm-chickenjob:giveChickens")
+  GiveChickenRewards(rewardData)
 end)
 
 RegisterServerEvent('bm-chickenjob:startChicken', function()

@@ -295,10 +295,40 @@ function ChickenChaseThread()
       if NumberOfCaughtChickens == 3 then
         IsPlayerCatchingChickens = false
         Notification(false, "Take the chickens to the processing factory ..", "primary", 8000)
-        TriggerServerEvent("bm-chickenjob:giveChickens")
+        local rewardData = WorkOutChickenChaseReward(NumberOfCaughtChickens)
+        TriggerServerEvent("bm-chickenjob:giveChickens", rewardData)
       end
     end
   end)
+end
+
+function WorkOutChickenChaseReward(NumberOfCaughtChickens)
+  DebugPrint2("Function: ", 'WorkOutChickenChaseReward()')
+  local rewardData = {}
+  local i = 0
+  while i < NumberOfCaughtChickens do
+    DebugPrint2("Iteration: ", i + 1)
+    for k, v in pairs(Config.ChickenCaptureRewards) do
+      DebugPrint2("Item: ", k)
+      local chance = math.random(1, 100)
+      DebugPrint2("Chance: ", chance)
+      if chance <= v.chance then
+        DebugPrint2("Got a ", v.label)
+        if not rewardData[k] then
+          DebugPrint2("Assigning item to reward table: ", k)
+          rewardData[k] = {}
+          rewardData[k].label = v.label
+          rewardData[k].amount = 1
+        else
+          DebugPrint2("Adding additonal amount to: ", k)
+          rewardData[k].amount = rewardData[k].amount + 1
+        end
+      end
+    end
+    i = i + 1
+  end
+  DebugPrint2("rewardData: ", rewardData)
+  return rewardData
 end
 
 function EndChickenChase()

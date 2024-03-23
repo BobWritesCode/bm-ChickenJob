@@ -17,6 +17,7 @@ A chicken job for civilians in your city.
 - Chicken capturing mini-game. Get in a pen with chickens and try to catch them by diving at them.
 - Chicken processing simulation. Take the chickens you have captured to be processed and packaged.
 - Optional to us qb-Target, can be toggled in config.
+- Configurable reward pool for the chicken chase.
 
 ## Usage
 
