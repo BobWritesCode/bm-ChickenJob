@@ -1,7 +1,5 @@
 QBCore = exports['qb-core']:GetCoreObject()
 
-local dealerPed = nil
-
 -- Create iteams
 for _, item in pairs(Config.RequiredItems) do
   exports['qb-core']:AddItem(
