@@ -13,7 +13,7 @@ end)
 
 QBCore.Functions.CreateCallback('bm-chickenjob:GetDealerPed',
   function(_, cb)
-    DebugPrint2('bm-chickenjob:GetDealerPed: ', DealerNetID)
+    DebugPrint2('bm-chickenjob:GetDealerPed: ', dealerNetID)
     cb(DealerNetID)
   end)
 

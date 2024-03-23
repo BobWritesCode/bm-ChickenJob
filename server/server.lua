@@ -30,11 +30,13 @@ RegisterServerEvent('bm-chickenjob:giveChickens', function(rewardData)
 end)
 
 RegisterServerEvent('bm-chickenjob:startChicken', function()
+  DebugPrint('bm-chickenjob:startChicken')
   local src = source
   Notification(src, false, "Lets catch the chicken dumbass!", "success", 8000)
 end)
 
 RegisterServerEvent('bm-chickenjob:getcutChicken', function()
+  DebugPrint('bm-chickenjob:getcutChicken')
   local src = source
   local Player = QBCore.Functions.GetPlayer(src)
   Notification(src, false, "Well! You slaughtered chicken.", "success", 8000)
@@ -47,6 +49,7 @@ RegisterServerEvent('bm-chickenjob:getcutChicken', function()
 end)
 
 RegisterServerEvent('bm-chickenjob:getpackedChicken', function()
+  DebugPrint('bm-chickenjob:getpackedChicken')
   local src = source
   local Player = QBCore.Functions.GetPlayer(src)
   Notification(src, false, "You packaged up some chicken.", "success", 8000)
@@ -59,6 +62,7 @@ RegisterServerEvent('bm-chickenjob:getpackedChicken', function()
 end)
 
 RegisterServerEvent('bm-chickenjob:sell', function()
+  DebugPrint('bm-chickenjob:sell')
   local src = source
   local price = Config.SellPrice
   local Player = QBCore.Functions.GetPlayer(src)
