@@ -107,10 +107,10 @@ Config = {
       Type = "item",
       Image = "alivechicken.png",
       Unique = false,
-      Useable = true,
+      Useable = false,
       ShouldClose = true,
       Combinable = nil,
-      Description = "For all the thirsty out there"
+      Description = "It\'s a living chicken."
     },
     packagedchicken    = {
       Name = "packagedchicken",
@@ -119,10 +119,10 @@ Config = {
       Type = "item",
       Image = "packagedchicken.png",
       Unique = false,
-      Useable = true,
+      Useable = false,
       ShouldClose = true,
       Combinable = nil,
-      Description = "For all the thirsty out there"
+      Description = "Ready for sale."
     },
     slaughteredchicken = {
       Name = "slaughteredchicken",
@@ -131,10 +131,10 @@ Config = {
       Type = "item",
       Image = "slaughteredchicken.png",
       Unique = false,
-      Useable = true,
+      Useable = false,
       ShouldClose = true,
       Combinable = nil,
-      Description = "For all the thirsty out there"
+      Description = "Time to sell or cook me."
     },
   },
   ---------------------------------
