@@ -21,6 +21,24 @@ function GetFarmerNetID()
   return FarmerNetID
 end
 
+CreateThread(function()
+  while true do
+    while not farmerPed do
+      TriggerEvent('bm-chickenjob:SpawnFarmerPed')
+      Wait(100)
     end
+    Wait(5000)
+    if farmerPed then
+      local c        = GetEntityCoords(farmerPed)
+      local distdiff = #(c - Config.Locations.chickenFarm.coords)
+      if distdiff > 5 then
+        DeleteEntity(farmerPed)
+        TriggerEvent('bm-chickenjob:SpawnFarmerPed')
+      end
+      if GetPedSourceOfDeath(farmerPed) ~= 0 then
+        DeleteEntity(farmerPed)
+        TriggerEvent('bm-chickenjob:SpawnFarmerPed')
+      end
     end
-  end)
+  end
+end)
