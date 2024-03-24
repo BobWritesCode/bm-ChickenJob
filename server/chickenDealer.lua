@@ -17,6 +17,11 @@ QBCore.Functions.CreateCallback('bm-chickenjob:GetDealerPed',
     cb(dealerNetID)
   end)
 
+function GetDealerNetID()
+  DebugPrint('GetDealerNetID()')
+  return dealerNetID
+end
+
 CreateThread(function()
   while true do
     while not dealerPed do

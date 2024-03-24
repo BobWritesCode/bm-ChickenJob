@@ -17,24 +17,10 @@ QBCore.Functions.CreateCallback('bm-chickenjob:GetFarmerPed',
     cb(farmerNetID)
   end)
 
-  CreateThread(function()
-    while true do
-      while not farmerPed do
-        TriggerEvent('bm-chickenjob:SpawnFarmerPed')
-        Wait(100)
-      end
-      Wait(5000)
-      if farmerPed then
-        local c  = GetEntityCoords(farmerPed)
-        local distdiff = #(c - Config.Locations.chickenFarm.coords)
-        if distdiff> 5 then
-          DeleteEntity(farmerPed)
-          TriggerEvent('bm-chickenjob:SpawnFarmerPed')
-        end
-        if GetPedSourceOfDeath(farmerPed) ~= 0 then
-          DeleteEntity(farmerPed)
-          TriggerEvent('bm-chickenjob:SpawnFarmerPed')
-        end
+function GetFarmerNetID()
+  return FarmerNetID
+end
+
     end
     end
   end)

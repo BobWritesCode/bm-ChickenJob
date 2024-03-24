@@ -22,6 +22,11 @@ local ItemList = {
   ["packagedchicken"] = math.random(50, 100),
 }
 
+QBCore.Functions.CreateCallback('bm-chickenjob:getPedEntities',
+  function(_, cb)
+    cb(GetFarmerNetID(), GetDealerNetID())
+  end)
+
 RegisterServerEvent('bm-chickenjob:giveChickens', function(rewardData)
   DebugPrint2("Called: ", "bm-chickenjob:giveChickens")
   GiveChickenRewards(rewardData)
