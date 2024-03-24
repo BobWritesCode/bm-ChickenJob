@@ -43,3 +43,5 @@ CreateThread(function()
   end
   end
 end)
+
+print("^1[Bob\'s Mods] ^2Chicken Job ^7- ^5chickenDealer^7")
