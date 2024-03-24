@@ -1,5 +1,5 @@
 function Notification(src, _title, msg, _notifyType, _notifyTime)
-  DebugPrint('Notification()')
+  DebugPrint2('Called: ', 'Notification')
   if Config.Notify == "QB" then
     local notifyTime = _notifyTime or 5000
     local notifyType = _notifyType or "primary"
@@ -13,7 +13,7 @@ function Notification(src, _title, msg, _notifyType, _notifyTime)
 end
 
 function GiveChickenRewards(rewardData)
-  DebugPrint('GiveChickenRewards()')
+  DebugPrint2('Called: ', 'GiveChickenRewards')
   local src = source
   local Player = QBCore.Functions.GetPlayer(src)
   DebugPrint("Giving reward items")

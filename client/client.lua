@@ -1,36 +1,28 @@
 QBCore = exports['qb-core']:GetCoreObject()
 
+local IsPacking = false
+local IsPortioningChicken = false
+
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
-  StartUp ()
+  StartUp()
 end)
 
 AddEventHandler('onResourceStart', function(resourceName)
   if GetCurrentResourceName() ~= resourceName then return end
-  StartUp ()
+  StartUp()
 end)
 
-function StartUp ()
+function StartUp()
   SetUpBlips()
   if Config.UseQBTarget then
     SetUpQBTargetWorkAreas()
+    GetPedEntities()
   else
     Markers1()
     Markers2()
     Markers3()
   end
 end
-
-RegisterNetEvent('bm-chickenjob:AssignNewChickenFarmerEnt', function(netID)
-  DebugPrint2('AssignNewChickenFarmerEnt: ', netID)
-  Wait(200)
-  AssignTargetToChickenFarmer(NetworkGetEntityFromNetworkId(netID))
-end)
-
-RegisterNetEvent('bm-chickenjob:AssignNewChickenDealerEnt', function(netID)
-  DebugPrint2('AssignNewChickenDealerEnt: ', netID)
-  Wait(200)
-  AssignTargetToChickenDealer(NetworkGetEntityFromNetworkId(netID))
-end)
 
 function Markers1()
   CreateThread(function()
@@ -132,4 +124,4 @@ function Markers3()
   end)
 end
 
-print("^1[Bob\'s Mods] ^2Chicken Job ^7- ^5Started.^7")
+print("^1[Bob\'s Mods] ^2Chicken Job ^7- ^5Client^7")

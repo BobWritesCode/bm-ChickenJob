@@ -61,6 +61,12 @@
     "TriggerClientEvent",
     "source",
     "AddEventHandler",
-    "GetCurrentResourceName"
+    "GetCurrentResourceName",
+    "IsPedAPlayer",
+    "TriggerEvent",
+    "promise",
+    "NetworkGetNetworkIdFromEntity",
+    "NetworkGetEntityFromNetworkId",
+    "GetPedSourceOfDeath"
   ]
 }

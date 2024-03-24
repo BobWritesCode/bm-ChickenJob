@@ -1,25 +1,28 @@
 local dealerPed = nil
-local dealerNetID = nil
+local dealerNetId = nil
 
 RegisterServerEvent('bm-chickenjob:SpawnDealerPed', function()
-  DebugPrint('bm-chickenjob:SetDealerPed')
+  DebugPrint2('Called: ', 'bm-chickenjob:SpawnDealerPed')
   local model = Config.Locations.chickenDealer.PedModel
   local coords = Config.Locations.chickenDealer.coords
   local h = Config.Locations.chickenDealer.PedModelHeading
   dealerPed = CreatePed(0, model, coords, h, true, false)
-  dealerNetID = NetworkGetNetworkIdFromEntity(dealerPed)
-  TriggerClientEvent('bm-chickenjob:AssignNewChickenDealerEnt', -1 , dealerNetID)
+  dealerNetId = NetworkGetNetworkIdFromEntity(dealerPed)
+  DebugPrint2('dealerPed: ', dealerPed)
+  DebugPrint2('dealerNetID: ', dealerNetId)
+  TriggerClientEvent('bm-chickenjob:AssignNewChickenDealerEnt', -1, dealerNetId)
 end)
 
-QBCore.Functions.CreateCallback('bm-chickenjob:GetDealerPed',
-  function(_, cb)
-    DebugPrint2('bm-chickenjob:GetDealerPed: ', dealerNetID)
-    cb(dealerNetID)
-  end)
-
 function GetDealerNetID()
-  DebugPrint('GetDealerNetID()')
-  return dealerNetID
+  DebugPrint2('Called: ', 'GetDealerNetID')
+  return dealerNetId
+end
+
+local function DeleteAndSpawnDealer()
+  DebugPrint2('Called: ', 'DeleteAndSpawnFarmer')
+  DebugPrint2('dealerPed:', dealerPed)
+  DeleteEntity(dealerPed)
+  TriggerEvent('bm-chickenjob:SpawnDealerPed')
 end
 
 CreateThread(function()
@@ -30,17 +33,12 @@ CreateThread(function()
     end
     Wait(5000)
     if dealerPed then
-      local c  = GetEntityCoords(dealerPed)
+      local c        = GetEntityCoords(dealerPed)
       local distdiff = #(c - Config.Locations.chickenDealer.coords)
-      if distdiff> 5 then
-        DeleteEntity(dealerPed)
-        TriggerEvent('bm-chickenjob:SpawnDealerPed')
+      if distdiff > 5 or GetPedSourceOfDeath(dealerPed) ~= 0 then
+        DeleteAndSpawnDealer()
       end
-      if GetPedSourceOfDeath(dealerPed) ~= 0 then
-        DeleteEntity(dealerPed)
-        TriggerEvent('bm-chickenjob:SpawnDealerPed')
-      end
-  end
+    end
   end
 end)
 

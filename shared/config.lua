@@ -7,7 +7,7 @@ Config = {
   UseQBTarget = true,
   ---------------------------------
   -- NOTIFY : Choice of notification system
-  Notify = 'QB',  -- Possible values: QB / okokNotify
+  Notify = 'QB', -- Possible values: QB / okokNotify
   ---------------------------------
   CaptureChance = 70, -- 0-100 chance of catching a chicken on each dive
   SellPrice = math.random(10, 50), -- How much each package chicken sells for.
@@ -21,10 +21,10 @@ Config = {
   ChickenCaptureRewards = {
     alivechicken = {
       label = "alive chicken", -- Label to show in notifications
-      chance = 100  -- 0-100 chance of getting item per chicken captured.
+      chance = 100 -- 0-100 chance of getting item per chicken captured.
     },
     egg = {
-      label = "egg", -- Label to show in notifications
+      label = "eggs", -- Label to show in notifications
       chance = 30 -- 0-100 chance of getting item per chicken captured.
     }
   },
@@ -55,8 +55,8 @@ Config = {
       blipDisplay = 4,
       blipScale = 0.6,
       blipColour = 64,
-      PedModel = "a_m_m_hillbilly_01",  -- If using QB-Target
-      PedModelHeading = 117.07  -- If using QB-Target
+      PedModel = "a_m_m_hillbilly_01", -- If using QB-Target
+      PedModelHeading = 117.07 -- If using QB-Target
     },
     cutting = { -- I WOULD AVOID CHANGING THESE UNLESS YOU KNOW WHAT YOU ARE DOING.
       one = {
@@ -69,7 +69,7 @@ Config = {
         E = 45.0,
       },
       two = {
-        coords = vector3(-100.52, 6202.48, 31.03),  -- Non QB-Target coords
+        coords = vector3(-100.52, 6202.48, 31.03), -- Non QB-Target coords
         QBTargetCoords = vector3(-100.08, 6202.0, 31.03), -- Coords for QB-Targert
         A = 222.0,
         B = -100.39,
