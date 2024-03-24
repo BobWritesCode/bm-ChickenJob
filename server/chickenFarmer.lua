@@ -21,7 +21,12 @@ end
 local function DeleteAndSpawnFarmer()
   DebugPrint2('Called: ', 'DeleteAndSpawnFarmer')
   DebugPrint2('farmerPed:', farmerPed)
-  DeleteEntity(farmerPed)
+  local doesEntityExist = DoesEntityExist(farmerPed)
+  DebugPrint2('doesEntityExist:', doesEntityExist)
+  if doesEntityExist then
+    DebugPrint('DeleteEntity(farmerPed):')
+    DeleteEntity(farmerPed)
+  end
   TriggerEvent('bm-chickenjob:SpawnFarmerPed')
 end
 

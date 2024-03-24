@@ -19,9 +19,14 @@ function GetDealerNetID()
 end
 
 local function DeleteAndSpawnDealer()
-  DebugPrint2('Called: ', 'DeleteAndSpawnFarmer')
+  DebugPrint2('Called: ', 'DeleteAndSpawnDealer')
   DebugPrint2('dealerPed:', dealerPed)
-  DeleteEntity(dealerPed)
+  local doesEntityExist = DoesEntityExist(dealerPed)
+  DebugPrint2('doesEntityExist:', doesEntityExist)
+  if doesEntityExist then
+    DebugPrint('DeleteEntity(dealerPed):')
+    DeleteEntity(dealerPed)
+  end
   TriggerEvent('bm-chickenjob:SpawnDealerPed')
 end
 
