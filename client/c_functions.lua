@@ -341,6 +341,14 @@ function EndChickenChase()
   end
 end
 
+function GetPedEntities()
+  QBCore.Functions.TriggerCallback('bm-chickenjob:getPedEntities', function(farmerNetID, dealerNetID)
+    Wait(200)
+    AssignTargetToChickenFarmer(NetworkGetEntityFromNetworkId(farmerNetID))
+    AssignTargetToChickenDealer(NetworkGetEntityFromNetworkId(dealerNetID))
+  end)
+end
+
 function AssignTargetToChickenFarmer(ent)
   DebugPrint2('Function: ', 'AssignTargetToChickenFarmer()')
   if farmerEnt then
