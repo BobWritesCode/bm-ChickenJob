@@ -48,4 +48,27 @@ function SellPackedChicken()
   DebugPrint2('Function end: ', 'SellPackedChicken()')
 end
 
+function DealerMarker()
+  CreateThread(function()
+    while true do
+      Wait(5)
+      local plyCoords = GetEntityCoords(GetPlayerPed(-1), false)
+      local dCoords = Config.Locations.chickenDealer.coords
+      local dist = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, dCoords.x, dCoords.y, dCoords.z)
+      if dist <= 20.0 then
+        DrawMarker(27, dCoords.x, dCoords.y, dCoords.z - 0.97, 0, 0, 0, 0, 0, 0, 0.90, 0.90, 0.90, 255,
+          255, 255, 200, 0, 0, 0, 0)
+      else
+        Wait(1000)
+      end
+      if dist <= 2.0 then
+        DrawText3D(dCoords.x, dCoords.y, dCoords.z + 0.1, "~g~[E]~w~ Sell packaged chicken")
+        if IsControlJustPressed(0, Config.Keys['E']) then
+          SellPackedChicken()
+        end
+      end
+    end
+  end)
+end
+
 print("^1[Bob\'s Mods] ^2Chicken Job ^7- ^5Dealer^7")

@@ -155,4 +155,33 @@ function EndChickenChase()
   end
 end
 
+function FarmMarker()
+  CreateThread(function()
+    while true do
+      Wait(0)
+      local plyCoords = GetEntityCoords(GetPlayerPed(-1))
+      local farmCoords = Config.Locations.chickenFarm.coords
+      local dist = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, farmCoords.x, farmCoords.y, farmCoords.z)
+      ---
+      if dist <= 20.0 then
+        DrawMarker(27, farmCoords.x, farmCoords.y, farmCoords.z - 0.97, 0, 0, 0, 0, 0, 0, 0.90, 0.90, 0.90,
+          255, 255,
+          255, 200, 0, 0, 0, 0)
+      else
+        Wait(1500)
+      end
+      if dist <= 2.5 then
+        DrawText3D(farmCoords.x, farmCoords.y, farmCoords.z, "~g~[E]~w~ To catch chickens")
+      end
+      --
+      if dist <= 0.5 then
+        if IsControlJustPressed(0, Config.Keys['E']) then
+          TriggerServerEvent("bm-chickenjob:startChicken")
+          StartChickenChase()
+        end
+      end
+    end
+  end)
+end
+
 print("^1[Bob\'s Mods] ^2Chicken Job ^7- ^5Farm^7")
