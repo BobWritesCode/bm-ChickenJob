@@ -30,6 +30,27 @@ local function DeleteAndSpawnDealer()
   TriggerEvent('bm-chickenjob:SpawnDealerPed')
 end
 
+function GiveChickenRewards(rewardData)
+  DebugPrint2('Called: ', 'GiveChickenRewards')
+  local src = source
+  local Player = QBCore.Functions.GetPlayer(src)
+  DebugPrint("Giving reward items")
+  for k, v in pairs(rewardData) do
+    if not QBCore.Shared.Items[k] then
+      ErrorPrint("Item does not exist: ", k)
+    else
+      DebugPrint2("Item: ", k)
+      DebugPrint2("Label: ", v.label)
+      DebugPrint2("amount: ", v.amount)
+      local label = v.label
+      local amount = v.amount
+      Notification(src, "Chicken Chase Rewards", "You received " .. amount .. " " .. label .. "(s)!", "success", 8000)
+      Player.Functions.AddItem(k, amount)
+      TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items[k], "add")
+    end
+  end
+end
+
 CreateThread(function()
   while true do
     while not dealerPed do
