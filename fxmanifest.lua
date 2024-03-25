@@ -15,8 +15,8 @@ client_script {
   'client/factory.lua'
 }
 server_script {
-  'server/server.lua',
   'server/s_functions.lua',
   'server/chickenFarmer.lua',
-  'server/chickenDealer.lua'
+  'server/chickenDealer.lua',
+  'server/server.lua',
 }
