@@ -110,7 +110,7 @@ function SetUpQBTargetWorkAreas()
     })
     x = x + 1
   end
-  for k, v in pairs(Config.Locations.packing) do
+  for _, v in pairs(Config.Locations.packing) do
     if Config.Debug then print("^4[Debug] ^2Setting up workarea at: ^3" .. v.QBTargetCoords .. "^7") end
     exports['qb-target']:AddCircleZone("workarea_" .. tostring(x), vector3(v.QBTargetCoords), 0.7, {
       name = "workarea_" .. tostring(x),
