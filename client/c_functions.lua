@@ -5,8 +5,13 @@ CreateThread(function()
   while true do
     Wait(1000)
     local pCoords = GetEntityCoords(PlayerPedId())
-    if (#(pCoords - Config.Locations.chickenFarm.coords) < 20 and farmerEnt == 0) or (#(pCoords - Config.Locations.chickenDealer.coords) < 20 and dealerEnt == 0) then
-      GetPedEntities()
+    DebugPrint2('Dist to farmer: ', #(pCoords - Config.Locations.chickenFarm.coords) )
+    DebugPrint2('farmerEnt: ',farmerEnt )
+    if (#(pCoords - Config.Locations.chickenFarm.coords) < 20 and (farmerEnt == nil or farmerEnt == 0)) then
+      GetPedEntity('farmer')
+    end
+    if (#(pCoords - Config.Locations.chickenDealer.coords) < 20 and dealerEnt == nil) then
+      GetPedEntity('dealer')
     end
   end
 end)
@@ -34,35 +39,40 @@ function LoadDict(dict)
   end
 end
 
-function GetPedEntities()
-  QBCore.Functions.TriggerCallback('bm-chickenjob:getPedEntities', function(farmerNetID, dealerNetID)
-    DebugPrint('bm-chickenjob:getPedEntitie')
+-- Arg: Accepted values are 'dealer' or 'farmer'.
+function GetPedEntity(targetPed)
+  DebugPrint2('Function: ', 'GetPedEntity')
+  DebugPrint2('targetPed: ', 'targetPed')
+  QBCore.Functions.TriggerCallback('bm-chickenjob:GetPedEntity', function(NetID)
+    DebugPrint('bm-chickenjob:GetPedEntity')
     Wait(200)
-    AssignTargetToPed('farmer', NetworkGetEntityFromNetworkId(farmerNetID))
-    AssignTargetToPed('dealer', NetworkGetEntityFromNetworkId(dealerNetID))
-  end)
+    AssignTargetToPed(targetPed, NetworkGetEntityFromNetworkId(NetID))
+  end, targetPed)
 end
 
-function AssignTargetToPed(target, ent)
+function AssignTargetToPed(targetPed, ent)
   DebugPrint2('Function: ', 'AssignTargetToPed()')
-  DebugPrint2('target: ', target)
+  DebugPrint2('target: ', targetPed)
   DebugPrint2('ent :', ent)
   local label
   local targetFunction
-  if target == "farmer" then
+  if targetPed == "farmer" then
     if farmerEnt then
       exports['qb-target']:RemoveTargetEntity(farmerEnt, 'Remove farmer Ent')
     end
     farmerEnt = ent
     label = 'Catch some chickens'
     targetFunction = function() StartChickenChase() end
-  elseif target == "dealer" then
+  elseif targetPed == "dealer" then
     if dealerEnt then
       exports['qb-target']:RemoveTargetEntity(dealerEnt, 'Remove dealer Ent')
     end
     dealerEnt = ent
     label = 'Sell packaged chickens.'
     targetFunction = function() SellPackedChicken() end
+  else
+    ErrorPrint('Called AssignTargetToPed with an invalid arg: ',targetPed)
+    return
   end
   exports['qb-target']:AddTargetEntity(ent, {
     options = {

@@ -16,7 +16,6 @@ function StartUp()
   SetUpBlips()
   if Config.UseQBTarget then
     SetUpQBTargetWorkAreas()
-    GetPedEntities()
   else
     Markers1()
     Markers2()
