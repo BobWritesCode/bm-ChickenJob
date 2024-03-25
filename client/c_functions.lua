@@ -2,7 +2,7 @@ local farmerEnt
 local dealerEnt
 
 CreateThread(function()
-  while true do
+  while Config.UseQBTarget do
     Wait(1000)
     local pCoords = GetEntityCoords(PlayerPedId())
     DebugPrint2('Dist to farmer: ', #(pCoords - Config.Locations.chickenFarm.coords) )

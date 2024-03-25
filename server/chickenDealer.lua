@@ -52,14 +52,14 @@ function GiveChickenRewards(rewardData)
 end
 
 CreateThread(function()
-  while true do
+  while Config.UseQBTarget do
     while not dealerPed do
       TriggerEvent('bm-chickenjob:SpawnDealerPed')
       Wait(100)
     end
     Wait(5000)
     if dealerPed then
-      local c        = GetEntityCoords(dealerPed)
+      local c = GetEntityCoords(dealerPed)
       local distdiff = #(c - Config.Locations.chickenDealer.coords)
       if distdiff > 5 or GetPedSourceOfDeath(dealerPed) ~= 0 then
         DeleteAndSpawnDealer()

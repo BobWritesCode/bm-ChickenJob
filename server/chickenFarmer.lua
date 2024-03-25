@@ -31,7 +31,7 @@ local function DeleteAndSpawnFarmer()
 end
 
 CreateThread(function()
-  while true do
+  while Config.UseQBTarget do
     while not farmerPed do
       TriggerEvent('bm-chickenjob:SpawnFarmerPed')
       Wait(100)
