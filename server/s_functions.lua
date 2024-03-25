@@ -44,3 +44,5 @@ end
 function DebugPrint2(str1, str2)
   if Config.Debug then print("^4[Debug] ^2" .. tostring(str1) .. "^3" .. tostring(str2) .. "^7") end
 end
+
+print("^1[Bob\'s Mods] ^2Chicken Job ^7- ^5Server functions^7")
