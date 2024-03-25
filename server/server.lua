@@ -1,26 +1,57 @@
 QBCore = exports['qb-core']:GetCoreObject()
 
--- Create iteams
-for _, item in pairs(Config.RequiredItems) do
-  exports['qb-core']:AddItem(
-    item.Name,
-    {
-      name = item.Name,
-      label = item.Label,
-      weight = item.Weight,
-      type = item.Type,
-      image = item.Picture,
-      unique = item.Unique,
-      useable = item.useable,
-      shouldClose = item.ShouldClose,
-      combinable = item.Combinable,
-      description = item.Description
-    })
+----------------------------------------------------
+-- Create items
+----------------------------------------------------
+function StartUp()
+  if (Leng(Config.RequiredItems)) == 0 then return end
+  for k, item in pairs(Config.RequiredItems) do
+    if QBCore.Shared.Items[k] then
+      print("^1[Error] ^2Tried to add item to qb shared item but already exists: ^3" .. k .. "^7")
+      print(
+      "^1[Error Note] ^2If you have restarted the script the item above may/would have been added at the server boot/restart.^7")
+    elseif CheckItemDoesNotAlreadyExist(item.Name) then
+      print("^1[Error] ^2Tried to add item to qb shared item but item name already exists: ^3" .. k .. "^7")
+      print(
+      "^1[Error Note] ^2If you have restarted the script the item above may/would have been added at the server boot/restart.^7")
+    else
+      exports['qb-core']:AddItem(
+        item.Name,
+        {
+          name = item.Name,
+          label = item.Label,
+          weight = item.Weight,
+          type = item.Type,
+          image = item.Picture,
+          unique = item.Unique,
+          useable = item.useable,
+          shouldClose = item.ShouldClose,
+          combinable = item.Combinable,
+          description = item.Description
+        })
+    end
+  end
 end
 
-local ItemList = {
-  ["packagedchicken"] = math.random(50, 100),
-}
+function CheckItemDoesNotAlreadyExist(itemName)
+  for _, value in pairs(QBCore.Shared.Items) do
+    if value.name == itemName then
+      return true
+    end
+  end
+  return false
+end
+
+function Leng(t)
+  local c = 0
+  for _ in pairs(t) do
+    c = c + 1
+  end
+  return c
+end
+
+--------------------------------------------------
+
 
 QBCore.Functions.CreateCallback('bm-chickenjob:getPedEntities',
   function(_, cb)
