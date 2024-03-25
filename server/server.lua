@@ -56,7 +56,6 @@ end
 
 --------------------------------------------------
 
-
 QBCore.Functions.CreateCallback('bm-chickenjob:GetPedEntity',
   function(_, cb, targetPed)
     DebugPrint2("Called: ", "bm-chickenjob:GetPedEntity")
@@ -131,4 +130,5 @@ RegisterServerEvent('bm-chickenjob:sell', function()
   end
 end)
 
-print("^1[Bob\'s Mods] ^2Chicken Job ^7- ^5Started.^7")
+StartUp()
+print("^1[Bob\'s Mods] ^2Chicken Job ^7- ^5Server^7")
