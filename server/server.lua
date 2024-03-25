@@ -1,5 +1,9 @@
 QBCore = exports['qb-core']:GetCoreObject()
 
+local ItemList = {
+  ["packagedchicken"] = math.random(50, 100),
+}
+
 ----------------------------------------------------
 -- Create items
 ----------------------------------------------------
@@ -53,9 +57,18 @@ end
 --------------------------------------------------
 
 
-QBCore.Functions.CreateCallback('bm-chickenjob:getPedEntities',
-  function(_, cb)
-    cb(GetFarmerNetID(), GetDealerNetID())
+QBCore.Functions.CreateCallback('bm-chickenjob:GetPedEntity',
+  function(_, cb, targetPed)
+    DebugPrint2("Called: ", "bm-chickenjob:GetPedEntity")
+    DebugPrint2("targetPed: ", targetPed)
+    if targetPed == 'farmer' then
+      cb(GetFarmerNetId())
+      return
+    elseif targetPed == 'dealer' then
+      cb(GetDealerNetId())
+      return
+    end
+    ErrorPrint('Called bm-chickenjob:GetPedEntity with an invalid arg: ', targetPed)
   end)
 
 RegisterServerEvent('bm-chickenjob:giveChickens', function(rewardData)
