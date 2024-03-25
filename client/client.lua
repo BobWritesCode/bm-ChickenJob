@@ -1,7 +1,7 @@
 QBCore = exports['qb-core']:GetCoreObject()
 
-local IsPacking = false
-local IsPortioningChicken = false
+IsPacking = false
+IsPortioningChicken = false
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
   StartUp()
