@@ -9,12 +9,12 @@ RegisterServerEvent('bm-chickenjob:SpawnDealerPed', function()
   dealerPed = CreatePed(0, model, coords, h, true, false)
   dealerNetId = NetworkGetNetworkIdFromEntity(dealerPed)
   DebugPrint2('dealerPed: ', dealerPed)
-  DebugPrint2('dealerNetID: ', dealerNetId)
+  DebugPrint2('GetDealerNetId: ', dealerNetId)
   TriggerClientEvent('bm-chickenjob:AssignNewChickenDealerEnt', -1, dealerNetId)
 end)
 
-function GetDealerNetID()
-  DebugPrint2('Called: ', 'GetDealerNetID')
+function GetDealerNetId()
+  DebugPrint2('Called: ', 'GetDealerNetId')
   return dealerNetId
 end
 

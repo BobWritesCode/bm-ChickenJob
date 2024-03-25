@@ -9,12 +9,12 @@ RegisterServerEvent('bm-chickenjob:SpawnFarmerPed', function()
   farmerPed = CreatePed(0, model, coords, h, true, false)
   farmerNetId = NetworkGetNetworkIdFromEntity(farmerPed)
   DebugPrint2('farmerPed: ', farmerPed)
-  DebugPrint2('FarmerNetID: ', farmerNetId)
+  DebugPrint2('FarmerNetId: ', farmerNetId)
   TriggerClientEvent('bm-chickenjob:AssignNewChickenFarmerEnt', -1, farmerNetId)
 end)
 
-function GetFarmerNetID()
-  DebugPrint2('Called: ', 'GetFarmerNetIDd')
+function GetFarmerNetId()
+  DebugPrint2('Called: ', 'GetFarmerNetId')
   return farmerNetId
 end
 
